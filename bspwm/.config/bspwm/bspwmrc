@@ -1,0 +1,42 @@
+#! /bin/bash 
+
+# Autostart of applications
+autorandr -c
+
+# Set the background
+~/.fehbg
+
+# Start the status bar for each monitor
+for monitor in $( bspc query -M --names ); do
+    export MONITOR=$monitor
+    polybar example &
+done
+
+nm-applet &
+blueman-applet &
+
+export SXHKD_SHELL=/usr/bin/bash
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# KVS office HD monitor
+bspc monitor DP1-2 -d dev surf social
+
+# KVS office CRT
+bspc monitor DP1-3 -d dev surf social
+
+# Laptop monitor
+bspc monitor eDP1 -d dev surf social
+
+bspc config border_width         2
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Chromium desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+bspc rule -a Emacs state=tiled
