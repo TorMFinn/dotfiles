@@ -1,0 +1,15 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	xterm
+
+# program launcher
+super + r
+	rofi -show run
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
