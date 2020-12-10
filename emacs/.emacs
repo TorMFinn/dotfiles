@@ -1,4 +1,4 @@
-					; EMACS Configuration file
+				; EMACS Configuration file
 
 ;; Initialize package manager and add melpa to package repositories
 (require 'package)
@@ -34,7 +34,7 @@
 
 ;; Set default font to something nice
 (add-to-list 'default-frame-alist
-             '(font . "Iosevka-10"))
+             '(font . "Fira Code-11"))
 
 ;; Do not create backupfiles in same folder as original file
 (setq backup-directory-alist '(("." . "~/.emacs_saves")))
@@ -62,6 +62,7 @@
     (global-undo-tree-mode))
   (add-to-list 'evil-emacs-state-modes 'sly-mrepl-mode)
   (add-to-list 'evil-emacs-state-modes 'sly-db-mode)
+  (add-to-list 'evil-emacs-state-modes 'slime-repl-mode)
   (add-to-list 'evil-emacs-state-modes 'eshell-mode)
   (evil-set-undo-system 'undo-tree)
   (evil-mode 1)
@@ -94,6 +95,11 @@
   :after treemacs projectile)
 
 ;; Misc Frameworks
+(use-package flycheck
+  :ensure t)
+
+(use-package magit
+  :ensure t)
 
 (use-package which-key
   :ensure t
@@ -163,18 +169,22 @@
   :init
   (setq inferior-lisp-program "sbcl"))
 
-;;(use-package slime-company
-  ;;:ensure t
-  ;;:defer t)
-;;
-;;(use-package slime
-  ;;:ensure t
-  ;;:init
-  ;;(setq inferior-lisp-program "sbcl")
-  ;;(setq slime-contribs '(slime-fancy
-                         ;;slime-company
-                         ;;slime-autodoc
-                         ;;slime-asdf)))
+(use-package slime-company
+  :ensure t
+  :disabled
+  :defer t)
+
+(use-package slime
+  :ensure t
+  :config
+  :disabled
+  (require 'slime-autoloads)
+  :init
+  (setq inferior-lisp-program "sbcl")
+  (setq slime-contribs '(slime-fancy
+                         slime-company
+                         slime-autodoc
+                         slime-asdf)))
 
 ;; C++ Programming Goodies
 (use-package modern-cpp-font-lock
@@ -182,9 +192,15 @@
 
 ;; Themes
 
+(use-package flatui-theme
+  :ensure t
+  :config
+  (load-theme 'flatui t))
+
 (use-package afternoon-theme
   :ensure t
   :config
+  :disabled
   (load-theme 'afternoon t))
 
 (use-package doom-themes
@@ -210,9 +226,6 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
-
-(use-package flycheck
-  :ensure t)
 
 (use-package vue-mode
   :ensure t)
@@ -258,7 +271,7 @@
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" default))
  '(package-selected-packages
-   '(glsl-mode golden-ratio afternoon-theme ivy-xref counsel-projectile counsel-projectile-mode auto-package-update yaml-mode yasnippet which-key vue-mode use-package udev-mode treemacs-projectile treemacs-evil sly rust-mode rainbow-delimiters protobuf-mode modern-cpp-font-lock js2-mode helm-projectile groovy-mode flycheck eglot doom-themes dockerfile-mode company-quickhelp cmake-font-lock beacon)))
+   '(flatui-theme magit glsl-mode golden-ratio afternoon-theme ivy-xref counsel-projectile counsel-projectile-mode auto-package-update yaml-mode yasnippet which-key vue-mode use-package udev-mode treemacs-projectile treemacs-evil rust-mode rainbow-delimiters protobuf-mode modern-cpp-font-lock js2-mode helm-projectile groovy-mode flycheck eglot doom-themes dockerfile-mode company-quickhelp cmake-font-lock beacon)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
