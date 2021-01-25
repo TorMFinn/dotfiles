@@ -87,9 +87,6 @@
   :init
   (setq treemacs-follow-mode t))
 
-(use-package treemacs-evil
-  :ensure t)
-
 (use-package treemacs-projectile
   :ensure t
   :after treemacs projectile)
@@ -192,9 +189,21 @@
 
 ;; Themes
 
+(use-package anti-zenburn-theme
+  :ensure t
+  :config
+  (load-theme 'anti-zenburn t))
+
+(use-package gruvbox-theme
+  :ensure t
+  :config
+  :disabled
+  (load-theme 'gruvbox-dark-hard t))
+
 (use-package flatui-theme
   :ensure t
   :config
+  :disabled
   (load-theme 'flatui t))
 
 (use-package afternoon-theme
@@ -269,9 +278,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" default))
+   '("33ea268218b70aa106ba51a85fe976bfae9cf6931b18ceaf57159c558bbcd1e6" "4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" default))
  '(package-selected-packages
-   '(flatui-theme magit glsl-mode golden-ratio afternoon-theme ivy-xref counsel-projectile counsel-projectile-mode auto-package-update yaml-mode yasnippet which-key vue-mode use-package udev-mode treemacs-projectile treemacs-evil rust-mode rainbow-delimiters protobuf-mode modern-cpp-font-lock js2-mode helm-projectile groovy-mode flycheck eglot doom-themes dockerfile-mode company-quickhelp cmake-font-lock beacon)))
+   '(gruvbox-theme flatui-theme magit glsl-mode golden-ratio afternoon-theme ivy-xref counsel-projectile counsel-projectile-mode auto-package-update yaml-mode yasnippet which-key vue-mode use-package udev-mode treemacs-projectile treemacs-evil rust-mode rainbow-delimiters protobuf-mode modern-cpp-font-lock js2-mode helm-projectile groovy-mode flycheck eglot doom-themes dockerfile-mode company-quickhelp cmake-font-lock beacon)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
